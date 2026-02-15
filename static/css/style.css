@@ -1,72 +1,82 @@
 body { 
-	margin: 0; 
-	font-family: "Hanken Grotesk", sans-serif; }
+    margin: 0; 
+    font-family: "Hanken Grotesk", sans-serif; 
+}
 
 /* ------------------- Navigation Bar Styles ------------------- */	
 
 ul.topnav {
-	list-style-type: none;
-	margin: 0;
-	padding: 0 20px;
-	overflow: hidden;
-	background-color: #fff; /* Changed to white per image */
-	border-bottom: 1px solid #e0e0e0;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+    list-style-type: none;
+    margin: 0;
+    padding: 0 20px;
+    overflow: visible;
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 45px;
 }
 
 ul.topnav li a {
-	display: block;
-	color: #000; /* Black text */
-	text-align: center;
-	padding: 16px 14px;
-	text-decoration: none;
-	font-size: 13px;
-	font-weight: 400;
-	letter-spacing: 1px;
+    display: block;
+    color: #000;
+    text-align: center;
+    padding: 0 14px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 45px;
 }
 
 /* Center Group */
 ul.topnav div.center-group {
-	display: flex;
-	justify-content: center;
-	flex: 1;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    height: 100%;
+}
+
+ul.topnav div.center-group li {
+    height: 100%;
 }
 
 ul.topnav div.center-group a {
-    display: flex;             /* Use flex to control alignment */
-    align-items: center;      /* Vertically center the text */
-    justify-content: center;   /* Horizontally center the text */
-    height: 45px;             /* Set a fixed height so the nav doesn't jump */
-    transition: font-size 0.2s ease; /* makes the expansion smooth */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    transition: all 0.2s ease;
 }
 
+/* Hover rule for center group links */
 ul.topnav div.center-group a:hover {
-	font-size: 18px; /* Increase font size on hover */
-	font-weight: 700; /* Make it bold on hover */
+    font-size: 18px;
+    font-weight: 700;
 }
 
 /* Sign In */
 ul.topnav li.signIn a:hover {
-	opacity: 0.5;
-	transition: opacity 0.2s ease; /* Adds a smooth fade effect */
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
 }
 
 /* Cart */
 ul.topnav li.cart a {
-	font-size: 17px; 
-	vertical-align: middle;
+    font-size: 17px; 
+    vertical-align: middle;
 }
 
 /* Dropdown Container */
 .dropdown {
-	display: inline-block;
+    display: inline-block;
 }
 
 .dropdown:hover .dropbtn {
     opacity: 0.5;
-    transition: opacity 0.2s ease; /* Adds a smooth fade effect */
+    transition: opacity 0.2s ease;
 }
 
 .dropbtn {
@@ -75,37 +85,132 @@ ul.topnav li.cart a {
 }
 
 .dropdown-content {
-	display: none;
-	position: absolute;
-	background-color: #f9f9f9;
-	min-width: 120px;
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	z-index: 1;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
 }
 
 .dropdown-content a {
-	color: black;
-	padding: 12px 16px;
-	text-align: left;
+    color: black;
+    padding: 12px 16px;
+    text-align: left;
 }
 
-.dropdown-content a:hover { background-color: #f1f1f1; }
+.dropdown-content a:hover { 
+    background-color: #f1f1f1; 
+}
 
-/* Show dropdown on hover */
 .dropdown:hover .dropdown-content {
-	display: block;
+    display: block;
+}
+
+/* Editorial Overlay Styles - Full Black Overlay */
+.menu-item-container {
+    position: relative;
+    height: 100%;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    z-index: 9999;
+    pointer-events: none; /* Prevents overlay from capturing mouse events */
+}
+
+/* Make the overlay content clickable */
+.overlay-content {
+    position: relative;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 30px;
+    padding: 10px;
+    pointer-events: auto; /* Allows clicking on the links */
+}
+
+/* Show overlay when hovering menu-item-container OR overlay-content */
+.menu-item-container:hover .menu-overlay,
+.overlay-content:hover .menu-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Keep overlay visible when hovering overlay-content */
+.overlay-content:hover {
+    cursor: default;
+}
+
+/* Keep overlay visible when hovering overlay-content */
+.overlay-content:hover ~ .menu-overlay,
+.menu-overlay:has(.overlay-content:hover) {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Change EDITORIAL text to white when overlay is active */
+.menu-item-container:hover .editorial-trigger,
+.overlay-content:hover ~ .menu-overlay .editorial-trigger {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff !important;
+    position: relative;
+    z-index: 10000;
+}
+
+/* Make the overlay content clickable */
+.overlay-content {
+    position: relative;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important; /* Align links to the left */
+    margin-top: 30px;
+    padding: 10px;
+    pointer-events: auto; /* Allows clicking on the links */
+    max-width: 80px; /* Set a maximum width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.overlay-content a {
+    color: #fff !important;
+    font-size: 13px !important;
+    padding: 10px !important; 
+    line-height: 1.0 !important; 
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+.overlay-content a:hover {
+    font-size: 15px !important;
+    font-weight: 700;
+    background: transparent !important;
+    opacity: 0.8;
 }
 
 /* --------------------- Responsiveness --------------------- */
-
-/* Specific fix for Desktop to keep it exactly 45px */
-@media screen and (min-width: 801px) {
-    ul.topnav {
-        max-height: 45px;
-    }
-}
-
 @media screen and (max-width: 800px) {
-	ul.topnav { flex-direction: column; }
-	.center-group { flex-direction: column; width: 100%; }
+    ul.topnav { 
+        flex-direction: column; 
+        height: auto;
+    }
+    .center-group { 
+        flex-direction: column; 
+        width: 100%; 
+    }
+    .menu-overlay {
+        top: auto;
+        padding-top: 20px;
+    }
 }
