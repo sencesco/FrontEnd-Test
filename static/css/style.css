@@ -36,7 +36,6 @@ ul.topnav div.center-group {
     display: flex;
     justify-content: center;
     flex: 1;
-    height: 100%;
 }
 
 ul.topnav div.center-group li {
@@ -88,7 +87,6 @@ ul.topnav li.cart a {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 120px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -133,10 +131,13 @@ ul.topnav li.cart a {
     z-index: 10000;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    align-items: flex-start !important; /* Align links to the left */
     margin-top: 30px;
     padding: 10px;
     pointer-events: auto; /* Allows clicking on the links */
+    max-width: 55px; /* Set a maximum width */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Show overlay when hovering menu-item-container OR overlay-content */
@@ -158,31 +159,6 @@ ul.topnav li.cart a {
     visibility: visible;
 }
 
-/* Change EDITORIAL text to white when overlay is active */
-.menu-item-container:hover .editorial-trigger,
-.overlay-content:hover ~ .menu-overlay .editorial-trigger {
-    font-size: 18px;
-    font-weight: 700;
-    color: #ffffff !important;
-    position: relative;
-    z-index: 10000;
-}
-
-/* Make the overlay content clickable */
-.overlay-content {
-    position: relative;
-    z-index: 10000;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start !important; /* Align links to the left */
-    margin-top: 30px;
-    padding: 10px;
-    pointer-events: auto; /* Allows clicking on the links */
-    max-width: 80px; /* Set a maximum width */
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .overlay-content a {
     color: #fff !important;
     font-size: 13px !important;
@@ -199,18 +175,187 @@ ul.topnav li.cart a {
     opacity: 0.8;
 }
 
+/* Hamburger Menu Icon */
+.hamburger-menus {
+    display: none;
+}
+
+
 /* --------------------- Responsiveness --------------------- */
-@media screen and (max-width: 800px) {
-    ul.topnav { 
-        flex-direction: column; 
+
+/* Only apply styles to desktop screens: Change EDITORIAL text to white when overlay is active */
+@media screen and (min-width: 1024px) {
+    .menu-item-container:hover .editorial-trigger,
+    .overlay-content:hover ~ .menu-overlay .editorial-trigger {
+        font-size: 18px;
+        font-weight: 700;
+        color: #ffffff !important;
+        position: relative;
+        z-index: 10000;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    /* grid container to 4 columns of topnav bar*/
+    ul.topnav {
+        display: grid;
+        grid-template-columns: 33% 34% 25.5% 8.5%;
         height: auto;
     }
-    .center-group { 
-        flex-direction: column; 
+
+    ul.topnav li a {
+        padding: 0; 
         width: 100%; 
     }
+
+    /* grid container border for check arrange */
+    /* ul.topnav > li {
+        border: 1px solid black;
+    } */
+
+    /* dropdown of language & currency to the left side of its column */
+    .dropdown {
+        grid-column: 1;
+        justify-self: left;
+    }
+
+    /* Hamburger menus: Centered in its column */
+    .hamburger-menus {
+        grid-column: 2;
+        justify-self: center;
+    }
+
+    /* Sign In: Align to the right side of its column */
+    .signIn {
+        grid-column: 3;
+        justify-self: right !important;
+        width: inherit;
+    }
+
+    /* Cart: Align to the far right of the last column */
+    .cart {
+        grid-column: 4;
+        justify-self: right;
+        width: inherit;
+    }
+
+    /* Center Group: Hidden by defualt */
+    ul.topnav .center-group {
+        display: none !important;
+        grid-column: 1 / -1;   /* span full width of grid */
+        grid-row: 2;           /* place on next row (under hamburger menus)*/
+
+    }
+
+    ul.topnav .center-group li a {
+        line-height: 40px;
+    }
+
+    /* The Container: Forces everything to the center */
+    .icon {
+        display: inline-flex !important;
+        align-items: center;    /* Vertical center */
+        justify-content: center; /* Horizontal center */
+        width: 30px;            /* Slightly wider for easier tapping */
+        height: 30px;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* The Hamburger (2-line dash) */
+    .hamburger-menus {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: black;
+        position: relative;
+        background: transparent; /* Make the middle "ghost" line invisible */
+    }
+
+    /* Create the top line */
+    .hamburger-menus::before {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 2px;
+        background: black;
+        top: -3px; /* Balanced distance from center */
+        left: 0;
+    }
+
+    /* Create the bottom line */
+    .hamburger-menus::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 2px;
+        background: black;
+        top: 3px; /* Balanced distance from center */
+        left: 0;
+    }
+
+    /* The Google "X" Icon adjustment */
+    .material-symbols-outlined {
+        font-size: 24px;
+        line-height: 1 !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        color: black;
+    }
+
+    /* The menu item as vertical flexbox */
+    .menu-item-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100%;
+    }
+
+    /* Pushes NEWS/STORIES down */
     .menu-overlay {
-        top: auto;
-        padding-top: 20px;
+        position: static !important;
+        display: none !important; /* Hidden by default */
+        opacity: 1 !important;
+        visibility: visible !important;
+        background: transparent !important;
+        height: auto !important;
+        width: 100% !important;
+    }
+
+    /* When parent is active, show the overlay */
+    .menu-item-container.active .menu-overlay {
+        display: block !important;
+    }
+
+    /* Layout for the sub-links */
+    .overlay-content {
+        display: flex !important;
+        position: static !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        padding-bottom: 15px !important;
+        max-width: none !important;
+    }
+
+    /* Force links to be BLACK and persistent */
+    .overlay-content a {
+        color: #000 !important; 
+        display: block !important;
+        text-align: center !important;
+        width: 100%;
+        padding: 8px 0 !important;
+    }
+
+    /* Disable desktop hover logic that hides things on mobile */
+    .menu-item-container:hover .menu-overlay,
+    .overlay-content:hover .menu-overlay {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    a.editorial-trigger {
+        padding: 0 !important;
     }
 }
