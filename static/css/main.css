@@ -1,0 +1,141 @@
+body { 
+    margin: 0; 
+    font-family: "Hanken Grotesk", sans-serif; 
+    background-color: #fff;
+}
+
+/* ----------------- Sticky Header and mockup Video Styles ----------------- */
+div#logo-sticky {
+    position: fixed; /* Sticks to the viewport */
+    width: 100%;
+    /* Ensure no padding pushes the width beyond 100% */
+    box-sizing: border-box; 
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    background-color: transparent; 
+    /* This allows the logo to interact with the background colors/images */
+    mix-blend-mode: difference; 
+    /* Prevents the sticky header from catching clicks if necessary */
+    pointer-events: none; 
+    z-index: 999;
+}
+
+div#logo-sticky img {
+    max-width: 100%;
+    height: auto;
+}
+
+video#mockupVd1 {
+    width: 100%;
+    height: auto; 
+    display: block;
+    z-index: 998; /* Ensure the video is behind the sticky header */
+}
+
+/* ----------------- Text Lorum Styles ----------------- */
+div.frame-desc {
+    align-items: center;
+    padding: 0px;
+    margin-top: 4px;
+    gap: 14px;
+    position: absolute;
+    width: 715px;
+    height: auto;
+    left: calc(50% - 715px/2 - 0.5px);
+}
+
+.text-p-h {
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
+    color: #000000;
+}
+
+.text-p {
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: #000000;
+}
+
+
+/* ----------------- Frame 10 Styles ----------------- */
+div#frame10 {
+    position: relative; /* Essential: Acts as the anchor for the children */
+    width: 100%;        /* Full width of the container */
+    height: 572px;      
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin-top: 100px;
+    z-index: 997; 
+}
+
+.frame10-img {
+    position: absolute; 
+    width: 566px;            
+    height: 572px;        
+    z-index: 997;           
+}
+
+.frame10-text-h {
+    position: absolute;    
+    margin: 0;             
+    font-style: normal;
+    font-weight: 900;
+    font-size: 80px;
+    line-height: 100%;
+    color: #FFFFFF;
+    z-index: 998;          /* Higher layer to stay on top */
+    pointer-events: none;  /* Optional: allows clicks to pass through to the image */
+}
+
+
+/* --------------------- Responsiveness --------------------- */
+
+@media screen and (max-width: 768px) {
+    
+    video#mockupVd1 {
+        object-fit: cover;
+        height: 713px; 
+        object-position: center; /* Ensures the center of the video is visible */
+    }
+
+    div.frame-desc {
+        margin-top: 6px;
+        width: 342px;
+        left: calc(50% - 342px/2 + 2px);
+    }
+
+    .text-p-h {
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .text-p {
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+
+    div#frame10 {
+        height: 286px;
+    }
+    
+    .frame10-img {
+        width: 282px;            
+        height: 286px;                 
+    }
+
+    .frame10-text-h {
+        font-size: 40px;
+    }
+
+}

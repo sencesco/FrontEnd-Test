@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Plaimanas</title>
     <!-- Linking static CSS File -->
-    <link rel="stylesheet" href="static/css/style.css" />
+    <link rel="stylesheet" href="static/css/main.css" />
+    <link rel="stylesheet" href="static/css/navbar.css" />
+
     <!-- Google Fonts: Hanken Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <!-- Google Fonts: Material Symbols Outlined -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <!-- Linking static JS File -->
-    <script src="static/js/script.js"></script>
     <!--- Iconify: shoping bag-->
     <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+    
+    <!-- Linking static JS File -->
+    <script src="static/js/script.js"></script>
 </head>
 <body>
     <ul class="topnav">
@@ -55,7 +58,25 @@
         </a>
         </li>
     </ul>
-    <h1>PLAIMANAS</h1>
-    <p>This is a simple HTML page.</p>
+
+    <div id="logo-sticky">
+        <img src="static/assets/img/PLAIMANAS.svg" alt="Plaimanas Logo" />
+    </div>
+
+    <video id="mockupVd1" autoplay loop muted playsinline>
+        <source src="static/assets/video/mockup_video576.mp4" type="video/mp4" alt="Plaimanas Mockup Video" \>
+        Your browser does not support the video tag.
+    </video>
+
+    <div id="frame10">
+        <img class="frame10-img" src="static/assets/img/Rectangle 1.svg" alt="Frame 10 Image" />
+        <p class="frame10-text-h">NEW</p>
+    </div>
+    <div class="frame-desc">
+        <p class="text-p-h">Sed egestas, nibh a condimentum imperdiet</p>
+        <p class="text-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare, nisl non rhoncus commodo, turpis elit ultricies justo, vitae molestie quam justo ut lacus. Proin vitae</p>
+    </div>
+
+
 </body>
 </html>
