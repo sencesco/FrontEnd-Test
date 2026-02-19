@@ -124,3 +124,53 @@ window.addEventListener('scroll', function() {
         }
     });
 });
+
+
+//FAQs category
+document.addEventListener("DOMContentLoaded", function () {
+
+    const btnShipping = document.getElementById("btn-shipping");
+    const btnReturns = document.getElementById("btn-returns");
+
+    const faqList1 = document.getElementById("faqs-list");
+    const faqList2 = document.getElementById("faqs-list2");
+
+    // SHIPPING button
+    btnShipping.addEventListener("click", function () {
+        faqList1.style.display = "flex";
+        faqList2.style.display = "none";
+
+        btnShipping.classList.add("active");
+        btnReturns.classList.remove("active");
+    });
+
+    // RETURNS button
+    btnReturns.addEventListener("click", function () {
+        faqList1.style.display = "none";
+        faqList2.style.display = "flex";
+
+        btnReturns.classList.add("active");
+        btnShipping.classList.remove("active");
+    });
+
+});
+
+
+
+
+
+//FAQs list toggle
+function faqToggle() {
+    const box = event.currentTarget.parentElement;
+    const answer = box.querySelector("p.text-p");
+    const icon = box.querySelector(".faqs-list-icon");
+
+    if (answer.style.display === "block") {
+        answer.style.display = "none";
+        icon.innerText = "expand_more";
+    } else {
+        answer.style.display = "block";
+        icon.innerText = "expand_less";
+    }
+}
+
