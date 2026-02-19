@@ -91,6 +91,36 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// Scrolling for moving "NEW" and "BESSELLER"
+window.addEventListener('scroll', function() {
+    // Select all headers you want to move (NEW, BESTSELLER, etc.)
+    const headers = document.querySelectorAll('.frame-text-h2-mv');
 
+    headers.forEach(header => {
+        const parent = header.parentElement;
+        const parentRect = parent.getBoundingClientRect();
+        const headerRect = header.getBoundingClientRect();
+        
+        // Calculate how much the parent has scrolled past the top of the screen
+        // If parentRect.top is negative, the user has scrolled into/past the section
+        if (parentRect.top < 0 && parentRect.bottom > headerRect.height) {
+            
+            // Calculate the new Y position
+            // We move the text by the amount the parent has gone off-screen
+            let moveY = Math.abs(parentRect.top);
+            
+            // Constraint: Don't let it go past the bottom of the parent
+            const maxMove = (parentRect.height - headerRect.height)/2;
+            
+            if (moveY > maxMove) {
+                moveY = maxMove;
+            }
 
-// Scrolling
+            // Apply the movement
+            header.style.transform = `translateY(${moveY}px)`;
+        } else {
+            // Reset to top/center if we haven't reached the section yet
+            header.style.transform = `translateY(0px)`;
+        }
+    });
+});

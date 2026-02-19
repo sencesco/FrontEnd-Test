@@ -2,7 +2,18 @@ body {
     margin: 0; 
     font-family: "Hanken Grotesk", sans-serif; 
     background-color: #fff;
+    overflow-x: hidden;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* vertical center alignment */
+    position: relative; 
+    width: 100%;
+    height: auto;
+}
+
 
 /* ----------------- Sticky Header and mockup Video Styles ----------------- */
 div#logo-sticky {
@@ -33,19 +44,60 @@ video#mockupVd1 {
     z-index: 998; /* Ensure the video is behind the sticky header */
 }
 
-/* ----------------- Text Lorum Styles ----------------- */
-div.frame-desc {
-    align-items: center;
-    padding: 0px;
-    margin-top: 4px;
-    gap: 14px;
-    position: absolute;
-    width: 715px;
-    height: auto;
-    left: calc(50% - 715px/2 - 0.5px);
+/* ----------------- Text Styles ----------------- */
+.frame-text-h2-mv {
+    /* position: absolute;     */
+    position: relative;    
+    margin: 0;             
+    font-style: normal;
+    font-weight: 900;
+    font-size: 80px;
+    line-height: 100%;
+    color: #FFFFFF;
+    z-index: 998;          /* Higher layer to stay on top */
+    pointer-events: none;  /* Optional: allows clicks to pass through to the image */
+    transition: transform 0.1s ease; 
 }
 
-.text-p-h {
+.frame-text-h3 {
+    position: absolute;    
+    margin: 0;             
+    font-style: normal;
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 100%;
+    color: #FFFFFF;
+    z-index: 998;       
+    pointer-events: none; 
+}
+
+.frame-text-h4 {
+    position: absolute;    
+    margin: 0;             
+    font-style: normal;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 100%;
+    color: #FFFFFF;
+    z-index: 998;       
+    pointer-events: none; 
+}
+
+div.frame-desc {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 14px;
+    position: relative;
+    width: 100%;
+    max-width: 715px;
+    height: auto;
+    transition: all 0.3s ease;
+}
+
+.text-h5 {
+    margin: 0;
     font-family: 'Arial';
     font-style: normal;
     font-weight: 700;
@@ -53,9 +105,15 @@ div.frame-desc {
     line-height: 18px;
     text-align: center;
     color: #000000;
+    text-transform: uppercase;
+}
+
+.addvt-desc h5.text-h5 {
+    text-align: left;
 }
 
 .text-p {
+    margin: 0;
     font-family: 'Arial';
     font-style: normal;
     font-weight: 400;
@@ -64,6 +122,13 @@ div.frame-desc {
     text-align: center;
     color: #000000;
 }
+
+.addvt-desc p.text-p {
+    margin-top: 14px;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.6);
+}
+
 
 
 /* ----------------- Frame 10 Styles ----------------- */
@@ -85,20 +150,189 @@ div#frame10 {
     z-index: 997;           
 }
 
-.frame10-text-h {
-    position: absolute;    
-    margin: 0;             
-    font-style: normal;
-    font-weight: 900;
-    font-size: 80px;
-    line-height: 100%;
-    color: #FFFFFF;
-    z-index: 998;          /* Higher layer to stay on top */
-    pointer-events: none;  /* Optional: allows clicks to pass through to the image */
+
+/* ----------------- Frame 11 Styles ----------------- */
+div#frame11 {
+    position: relative;
+    width: 100%;        
+    height: 759px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin-top: 100px;
+    z-index: 997; 
+}
+
+#bestSellVd {
+    position: absolute; 
+    width: 1200px;            
+    height: 100%;
+    object-fit: fill; /* forces to fill entire area and not maintain aspect ratio */        
+    z-index: 997;
+}
+
+/* ----------------- Frame 40 Styles ----------------- */
+#frame40 {
+    position: relative;
+    width: 100%;
+    min-height: 990px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin-top: 100px;
+    z-index: 994; 
+}
+
+.frame40-content {
+    display: flex;
+    flex-wrap: wrap;       /* Allows items to sit side-by-side */
+    justify-content: center;
+    row-gap: 60px;
+    column-gap: 68px;
+    width: 95%;            /* Scales with the screen */
+    max-width: 978px;      /* Stops it from getting too big */
+    height: auto;          /* Let content define height for zoom safety */
+    z-index: 995;
+}
+
+#collection-01 {
+    flex: 0 0 100%;        /* Forces it to take the full width */
+    position: relative;   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;           /* Fills the container */
+    max-width: 978px;
+    height: 475px;
+}
+
+#collection-02, 
+#collection-03 {
+    /* (100% - gap) / 2 = approx 46.5% */
+    flex: 0 1 calc(50% - 34px);  /* 34 from column-gap: 68px/2 */
+    position: relative;   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 455px;
+    height: 455px;
+}
+
+#collection-video-hover,
+.collection-img-hover {
+    position: absolute; 
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    opacity: 0;
+    transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
 
+#collection-01:hover #collection-video-hover,
+#collection-02:hover .collection-img-hover,
+#collection-03:hover .collection-img-hover {
+    opacity: 1;
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+
+/* --------------------- Auto Scrolling Text --------------------- */
+div#auto-scroll-txt {
+    width: 100%;
+    height: 85px;
+    background-color: #000000; 
+    margin-top: 100px;
+    z-index: 997; 
+    overflow: hidden;
+}
+
+.mv {
+    display: flex;             
+    justify-content: center;   
+    align-items: center;   
+    white-space: nowrap; /* Keeps text on one line */
+    animation: scroll-left 10s linear infinite;
+}
+
+.mv-txt {
+    font-style: normal;
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 78px;
+    color: #ffffff;
+}
+
+.mv-arrow {
+    width: 85px;
+    height: 85px;
+    margin: 0px 95px;
+    color: #ffffff;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%); /* Start position */
+  }
+  100% {
+    transform: translateX(-50%); /* Moves text left completely */
+  }
+}
+
+/* ----------------- Frame 13 Styles ----------------- */
+div#frame13 {
+    position: relative;
+    width: 100%;        
+    height: 96px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin-top: 140px;
+    z-index: 994; 
+}
+
+.addvt-content {
+    width: 1092px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.addvt-desc {
+    width: 280px;
+}
+
+
+/* ----------------- FAQs Styles ----------------- */
+div#faqs {
+    position: relative;
+    width: 100%;        
+    height: 645px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin-top: 140px;
+    z-index: 994; 
+}
+
+
+
+
+
+
+
+
 /* --------------------- Responsiveness --------------------- */
+
+@media screen and (min-width: 1024px) {
+
+    div.frame-desc:hover {
+        opacity: 0.5;
+        transition: all 0.3s ease;
+    }
+
+}
+
 
 @media screen and (max-width: 768px) {
     
@@ -109,9 +343,19 @@ div#frame10 {
     }
 
     div.frame-desc {
-        margin-top: 6px;
         width: 342px;
-        left: calc(50% - 342px/2 + 2px);
+    }
+
+    .frame-text-h {
+        font-size: 40px;
+    }
+
+    .frame-text-h-static-1 {
+        font-size: 30px;
+    }
+
+    .frame-text-h-static-2 {
+        font-size: 18px;
     }
 
     .text-p-h {
@@ -124,7 +368,6 @@ div#frame10 {
         line-height: 16px;
     }
 
-
     div#frame10 {
         height: 286px;
     }
@@ -134,8 +377,75 @@ div#frame10 {
         height: 286px;                 
     }
 
-    .frame10-text-h {
-        font-size: 40px;
+    div#frame11 {
+        height: 219px;
     }
+    
+    #bestSellVd {
+        width: 346px;            
+        height: 100%;        
+    }
+
+    #frame40 {
+        min-height: auto; 
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #frame40 {
+        min-height: auto; 
+    }
+
+    .frame40-content {
+        width: 346px; 
+        max-width: 100%; 
+        row-gap: 24px;
+        column-gap: 24px;
+        justify-content: center;
+    }
+
+    #collection-01 {
+        flex: 0 0 346px;
+        width: 346px;
+        height: 167px; 
+    }
+
+    #collection-02, 
+    #collection-03 {
+        flex: 0 0 161px; 
+        width: 161px;
+        height: 161px;
+
+    }
+
+    /* Forces the images/video to stay INSIDE the boxes */
+    #collection-01 img, #collection-01 video,
+    #collection-02 img, #collection-03 img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .mv-txt {
+        font-size: 24px;
+    }
+
+    .mv-arrow {
+        margin: 0px 20px;
+    }
+
+    div#frame13 {
+        height: 384px;
+        margin-top: 100px;
+    }
+
+    .addvt-content {
+        width: 346px;
+        flex-direction: column;
+    }
+
 
 }
